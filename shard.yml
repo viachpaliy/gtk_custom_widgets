@@ -1,0 +1,13 @@
+name: gtk_custom_widgets
+version: 0.1.0
+
+authors:
+  - viachpaliy <viachpaliy@ukr.net>
+
+dependencies:
+  cairo-gobject:
+    github: viachpaliy/cairo-gobject
+
+crystal: 0.33.0
+
+license: MIT
