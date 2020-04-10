@@ -14,6 +14,7 @@ class CairoApp
     @window.connect "destroy", &->Gtk.main_quit
     ssd = GtkCustomWidgets::EightSegmentDisplay.new
     ssd.seg_width = 0.1
+    ssd.on_color = GtkCustomWidgets::Color.new 1.0, 0.31, 0.0
     hb = Gtk::Box.new :horizontal, 2
     bbox1 = Gtk::ButtonBox.new :vertical
     btn0 = Gtk::Button.new_with_label "0"
@@ -74,7 +75,7 @@ class CairoApp
     btn_minus.on_clicked { ssd.set_seg(false, false, false, false, false, false, true) }
     bbox3.pack_start(btn_minus, expand = true, fill = true, padding = 2)
     btn_dot = Gtk::Button.new_with_label "."
-    btn_dot.on_clicked { ssd.set_dot(true) }
+    btn_dot.on_clicked { ssd.set_dot(!ssd.dot) }
     bbox3.pack_start(btn_dot, expand = true, fill = true, padding = 2)
     hb.pack_start(bbox3, expand = false, fill = true, padding = 2)
     hb.pack_start(ssd, expand = true, fill = true, padding = 2)
