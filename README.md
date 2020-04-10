@@ -16,10 +16,13 @@ The "gtk_custom_widgets" is a collection of helper functions and custom controls
      gtk_custom_widgets:
        github: viachpaliy/gtk_custom_widgets
    ```
+
+2. Run `shards install`
+
 Note : this shard use "gobject"(https://github.com/jhass/crystal-gobject) and "cairo-gobject"((https://github.com/viachpaliy/cairo-gobject) shards.
  If you use Ubuntu18.04 based distributives uncomment *Rectangle* structure in *lib/cairo-gobject/src/lib_cairo.cr* file (lines 7...12). 
 
-2. Run `shards install`
+
 
 ## Usage
 
