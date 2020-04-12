@@ -31,7 +31,7 @@ module GtkCustomWidgets
       @bg_color = Color.new 1.0, 1.0, 1.0
       @on_color = Color.new 1.0, 0.0, 0.0
       @off_color = Color.new 0.85, 0.85, 0.85
-      @seg_width = 0.2
+      @seg_width = 0.1
       @seg_a = false
       @seg_b = false
       @seg_c = false
