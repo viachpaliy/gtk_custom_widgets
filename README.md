@@ -5,7 +5,9 @@ The "gtk_custom_widgets" is a collection of helper functions and custom controls
 ### Controls
 
  - [SevenSegmentDisplay](doc/Controls/SevenSegmentDisplay.md)
+ - [SlopSevSegDisplay](doc/Controls/SlopSevSegDisplay.md)
  - [EightSegmentDisplay](doc/Controls/EightSegmentDisplay.md)
+ 
 
 ## Installation
 
@@ -27,7 +29,7 @@ Note : this shard use "gobject"(https://github.com/jhass/crystal-gobject) and "c
 ## Usage
 
 ```crystal
-require "gtk_custom_widgets"
+require "gtk_custom_widgets/gtk_custom_widgets"
 ```
 
 TODO: Write usage instructions here

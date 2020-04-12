@@ -1,6 +1,6 @@
 require "gobject/gtk/autorun"
 require "cairo-gobject/cairo"
-require "../src/gtk_custom_widgets"
+require "gtk_custom_widgets"
 
 class CairoApp
   @window : Gtk::Window
