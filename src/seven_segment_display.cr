@@ -190,7 +190,9 @@ module GtkCustomWidgets
       when '[' 
         set_seg_without_draw(true,false,false,true,true,true,false) 
       when ']' 
-        set_seg_without_draw(true,true,true,true,false,false,false) 
+        set_seg_without_draw(true,true,true,true,false,false,false)
+      when ' ' 
+        set_seg_without_draw(false,false,false,false,false,false,false)  
       end 
     end
 
