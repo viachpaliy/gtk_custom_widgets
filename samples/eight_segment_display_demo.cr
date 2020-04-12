@@ -9,7 +9,7 @@ class CairoApp
 
   def initialize
     @window = Gtk::Window.new
-    @window.title = "Seven Segment Display"
+    @window.title = "Eight Segment Display"
     @window.resize 500,500
     @window.connect "destroy", &->Gtk.main_quit
     ssd = GtkCustomWidgets::EightSegmentDisplay.new

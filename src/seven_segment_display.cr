@@ -28,9 +28,6 @@ module GtkCustomWidgets
       super(ptr)
       hexpand = true
       vexpand = true
-      @darea = Gtk::DrawingArea.new
-      @darea.connect "draw",&->draw
-      add @darea
       @bg_color = Color.new 1.0, 1.0, 1.0
       @on_color = Color.new 1.0, 0.0, 0.0
       @off_color = Color.new 0.85, 0.85, 0.85
@@ -42,9 +39,12 @@ module GtkCustomWidgets
       @seg_e = false
       @seg_f = false
       @seg_g = false
+      @darea = Gtk::DrawingArea.new
+      @darea.connect "draw",&->draw
+      add @darea
     end
-
-    def set_seg(a : Bool = false, b : Bool = false, c : Bool = false, d : Bool = false, 
+  
+    def set_seg_without_draw(a : Bool = false, b : Bool = false, c : Bool = false, d : Bool = false, 
                 e : Bool = false, f : Bool = false, g : Bool = false)
       @seg_a = a
       @seg_b = b
@@ -53,44 +53,150 @@ module GtkCustomWidgets
       @seg_e = e
       @seg_f = f
       @seg_g = g  
+    end
+
+    def set_seg(a : Bool = false, b : Bool = false, c : Bool = false, d : Bool = false, 
+                e : Bool = false, f : Bool = false, g : Bool = false)
+      set_seg_without_draw(a, b, c, d, e, f, g)
       draw     
     end
 
-    def hex=(value : UInt32)
+    def set_hex(value : UInt32)
       case value
       when 0
-        set_seg(true,true,true,true,true,true,false)
+        set_seg_without_draw(true,true,true,true,true,true,false)
       when 1
-        set_seg(a=false, b = true, c = true)
+        set_seg_without_draw(a=false, b = true, c = true)
       when 2
-        set_seg(true,true,false,true,true,false,true)
+        set_seg_without_draw(true,true,false,true,true,false,true)
       when 3
-        set_seg(true,true,true,true,false,false,true)
+        set_seg_without_draw(true,true,true,true,false,false,true)
       when 4
-        set_seg(false,true,true,false,false,true,true)
+        set_seg_without_draw(false,true,true,false,false,true,true)
       when 5
-        set_seg(true,false,true,true,false,true,true)
+        set_seg_without_draw(true,false,true,true,false,true,true)
       when 6
-        set_seg(true,false,true,true,true,true,true)
+        set_seg_without_draw(true,false,true,true,true,true,true)
       when 7
-        set_seg(true,true,true) 
+        set_seg_without_draw(true,true,true) 
       when 8
-        set_seg(true,true,true,true,true,true,true)
+        set_seg_without_draw(true,true,true,true,true,true,true)
       when 9
-        set_seg(true,true,true,true,false,true,true)
+        set_seg_without_draw(true,true,true,true,false,true,true)
       when 10 
-        set_seg(true,true,true,false,true,true,true)
+        set_seg_without_draw(true,true,true,false,true,true,true)
       when 11 
-        set_seg(false,false,true,true,true,true,true)
+        set_seg_without_draw(false,false,true,true,true,true,true)
       when 12 
-        set_seg(true,false,false,true,true,true,false) 
+        set_seg_without_draw(true,false,false,true,true,true,false) 
       when 13
         set_seg(false,true,true,true,true,false,true)
       when 14
-        set_seg(true,false,false,true,true,true,true)
+        set_seg_without_draw(true,false,false,true,true,true,true)
       when 15
-        set_seg(true,false,false,false,true,true,true)     
+        set_seg_without_draw(true,false,false,false,true,true,true)     
       end 
+    end
+
+    def hex=(value : UInt32)
+      set_hex(value)
+      draw
+    end
+
+    def set_char(value : Char)
+       case value
+      when '0'
+        set_seg_without_draw(true,true,true,true,true,true,false)
+      when '1'
+        set_seg_without_draw(a=false, b = true, c = true)
+      when '2'
+        set_seg_without_draw(true,true,false,true,true,false,true)
+      when '3'
+        set_seg_without_draw(true,true,true,true,false,false,true)
+      when '4'
+        set_seg_without_draw(false,true,true,false,false,true,true)
+      when '5'
+        set_seg_without_draw(true,false,true,true,false,true,true)
+      when '6'
+        set_seg_without_draw(true,false,true,true,true,true,true)
+      when '7'
+        set_seg_without_draw(true,true,true) 
+      when '8'
+        set_seg_without_draw(true,true,true,true,true,true,true)
+      when '9'
+        set_seg_without_draw(true,true,true,true,false,true,true)
+      when 'A' 
+        set_seg_without_draw(true,true,true,false,true,true,true)
+      when 'b' 
+        set_seg_without_draw(false,false,true,true,true,true,true)
+      when 'C' 
+        set_seg_without_draw(true,false,false,true,true,true,false) 
+      when 'c' 
+        set_seg_without_draw(false,false,false,true,true,false,true)
+      when 'd'
+        set_seg(false,true,true,true,true,false,true)
+      when 'E'
+        set_seg_without_draw(true,false,false,true,true,true,true)
+      when 'F'
+        set_seg_without_draw(true,false,false,false,true,true,true)
+      when 'G'
+        set_seg_without_draw(true,false,true,true,true,true,false)
+      when 'H'
+        set_seg_without_draw(false,true,true,false,true,true,true)
+      when 'h'
+        set_seg_without_draw(false,false,true,false,true,true,true)
+      when 'I'
+        set_seg_without_draw(false,false,false,false,true,true,false)
+      when 'i'
+        set_seg_without_draw(false,false,true,false,false,false,false)
+      when 'J'
+        set_seg_without_draw(false,true,true,true,true,false,false) 
+      when 'L'
+        set_seg_without_draw(false,false,false,true,true,true,false)
+      when 'n'
+        set_seg_without_draw(false,false,true,false,true,false,true)
+      when 'O'
+        set_seg_without_draw(true,true,true,true,true,true,false) 
+      when 'o'
+        set_seg_without_draw(false,false,true,true,true,false,true)
+      when 'P' 
+        set_seg_without_draw(true,true,false,false,true,true,true)
+      when 'q' 
+        set_seg_without_draw(true,true,true,false,false,true,true)
+      when 'r'
+        set_seg_without_draw(false,false,false,false,true,false,true)
+      when 'S'
+        set_seg_without_draw(true,false,true,true,false,true,true)
+      when 't' 
+        set_seg_without_draw(false,false,false,true,true,true,true)
+      when 'U'
+        set_seg_without_draw(false,true,true,true,true,true,false) 
+      when 'u'
+        set_seg_without_draw(false,false,true,true,true,false,false)
+      when 'Y'
+        set_seg_without_draw(false,true,true,true,false,true,true)
+      when '_'
+        set_seg_without_draw(false,false,false,true,false,false,false)
+      when '-'
+        set_seg_without_draw(false,false,false,false,false,false,true)
+      when '='
+        set_seg_without_draw(false,false,false,true,false,false,true)
+      when '\''
+        set_seg_without_draw(false,false,false,false,false,true,false)
+      when '"'
+        set_seg_without_draw(false,true,false,false,false,true,false)
+      when '\u00B0'
+        set_seg_without_draw(true,true,false,false,false,true,true)
+      when '[' 
+        set_seg_without_draw(true,false,false,true,true,true,false) 
+      when ']' 
+        set_seg_without_draw(true,true,true,true,false,false,false) 
+      end 
+    end
+
+    def char=(value : Char)
+      set_char(value) 
+      draw
     end
 
     def draw
