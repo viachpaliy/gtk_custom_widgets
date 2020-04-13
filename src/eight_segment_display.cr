@@ -26,16 +26,7 @@ module GtkCustomWidgets
       draw_seg
       draw_dot
     end
-
-    def set_char(value : Char)
-      super(value)
-      if value='.'
-        set_dot(true)
-      else
-        set_dot(false)
-      end
-    end
-
+ 
     def draw_dot
       context = Gdk.cairo_create(@darea.window.not_nil!)
       set_color(context, dot)

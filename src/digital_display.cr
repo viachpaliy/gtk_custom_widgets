@@ -53,7 +53,7 @@ module GtkCustomWidgets
         end
         @digits.delete_at(num...@n)
       end
-      @n = n
+      @n = num
       @digits.each do |digit|
         digit.bg_color = bg_color
         digit.on_color = on_color
@@ -89,6 +89,57 @@ module GtkCustomWidgets
       @seg_width = value
     end
 
+    def print(text : String)
+      i = 0
+      @digits.each do |digit|
+        if i < text.size
+          digit.set_char  text[i]
+        else
+          digit.set_char ' '
+        end 
+        i +=1
+      end
+    end
+
+    def print(number : Int8 | Int16 | Int32 | Int64 | UInt8 | UInt16 | UInt32 | UInt64)
+      if number.to_s.size < n
+         str = " " * (n - number.to_s.size) + number.to_s
+      else
+         str = number.to_s
+      end
+      print str 
+    end
+
+    def print(number : Float32 | Float64)
+      has_dp = false
+      if number.to_s.includes?('.')
+        has_dp = true
+        index_dp = number.to_s.index '.'
+        str = number.to_s.delete '.'
+      else
+        str = number.to_s     
+      end 
+      if str.size < n
+        if has_dp 
+          if index_dp
+            index_dp = index_dp + n - str.size
+          end
+        end
+        str = " " * (n - str.size) + str
+      end
+      print str
+      if has_dp
+        i = 1
+        @digits.each do |digit|
+          if i == index_dp
+            if digit.responds_to?(:dot=)
+              digit.dot = true
+            end
+          end 
+          i += 1
+        end
+      end
+    end
   end
 
 

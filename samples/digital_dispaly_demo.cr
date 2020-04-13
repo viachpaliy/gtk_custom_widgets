@@ -16,7 +16,9 @@ class CairoApp
     dd.n = 7
     dd.bg_color = GtkCustomWidgets::Color.new_from_bytes 0xCE, 0xCE, 0xCE
     dd.off_color = GtkCustomWidgets::Color.new 1.0, 1.0, 1.0
-    dd.on_color = GtkCustomWidgets::Color.new 1.0, 0.0, 0.0
+    dd.on_color = GtkCustomWidgets::Color.new 0.0, 0.0, 1.0
+    #dd.print "HELLO"
+    dd.print -123.45 
     @window.add dd
   end
 

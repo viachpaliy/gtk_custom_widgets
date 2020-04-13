@@ -103,6 +103,10 @@ module GtkCustomWidgets
       draw
     end
 
+    def reset
+      char = ' '
+    end
+
     def set_char(value : Char)
        case value
       when '0'
