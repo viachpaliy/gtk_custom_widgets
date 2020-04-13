@@ -14,6 +14,9 @@ class CairoApp
     @window.connect "destroy", &->Gtk.main_quit
     dd = GtkCustomWidgets::DigitalDisplay(GtkCustomWidgets::EightSegmentDisplay).new 
     dd.n = 7
+    dd.bg_color = GtkCustomWidgets::Color.new_from_bytes 0xCE, 0xCE, 0xCE
+    dd.off_color = GtkCustomWidgets::Color.new 1.0, 1.0, 1.0
+    dd.on_color = GtkCustomWidgets::Color.new 1.0, 0.0, 0.0
     @window.add dd
   end
 

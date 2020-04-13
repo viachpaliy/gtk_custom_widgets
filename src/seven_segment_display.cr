@@ -215,7 +215,7 @@ module GtkCustomWidgets
 
     def draw_background
       context = Gdk.cairo_create(@darea.window.not_nil!)
-      context.set_source_rgb( 1.0, 1.0, 1.0)
+      context.set_source_rgb(@bg_color.red, @bg_color.green, @bg_color.blue)
       context.rectangle(0, 0, @darea.allocated_width, @darea.allocated_height)
       context.stroke_preserve
       context.fill
