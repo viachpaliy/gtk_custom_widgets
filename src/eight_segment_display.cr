@@ -5,7 +5,7 @@ module GtkCustomWidgets
 
   class EightSegmentDisplay < SlopSevSegDisplay
 
-    property dot : Bool
+    getter dp : Bool
  
     def self.new
       super 
@@ -13,12 +13,14 @@ module GtkCustomWidgets
 
     def initialize(ptr)
       super(ptr)
-      @dot = false
+      @dp = false
     end
 
-    def set_dot(value : Bool = false)
-      @dot = value
-      draw
+    def dp=(value : Bool = false)
+      @dp = value
+      if mapped
+        queue_draw
+      end 
     end
 
     def draw
@@ -29,7 +31,7 @@ module GtkCustomWidgets
  
     def draw_dot
       context = Gdk.cairo_create(@darea.window.not_nil!)
-      set_color(context, dot)
+      set_color(context, dp)
       if @seg_width > 0.15 * @darea.allocated_width / @darea.allocated_height
         radius = 0.075 * @darea.allocated_width 
       else

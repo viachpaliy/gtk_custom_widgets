@@ -135,15 +135,12 @@ module GtkCustomWidgets
         i = 1
         @digits.each do |digit|
           if i == index_dp
-            if digit.responds_to?(:dot=)
-              digit.dot = true
+            if digit.responds_to?(:dp=)
+              digit.dp = true
             end
           end 
           i += 1
         end
-      end
-      if mapped
-        queue_draw
       end
     end
 

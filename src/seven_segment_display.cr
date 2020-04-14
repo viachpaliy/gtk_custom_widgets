@@ -58,7 +58,9 @@ module GtkCustomWidgets
     def set_seg(a : Bool = false, b : Bool = false, c : Bool = false, d : Bool = false, 
                 e : Bool = false, f : Bool = false, g : Bool = false)
       set_seg_without_draw(a, b, c, d, e, f, g)
-      draw     
+      if mapped
+        queue_draw
+      end     
     end
 
     def set_hex(value : UInt32)
@@ -100,7 +102,9 @@ module GtkCustomWidgets
 
     def hex=(value : UInt32)
       set_hex(value)
-      draw
+      if mapped
+        queue_draw
+      end 
     end
 
     def reset
@@ -202,7 +206,9 @@ module GtkCustomWidgets
 
     def char=(value : Char)
       set_char(value) 
-      draw
+      if mapped
+        queue_draw
+      end 
     end
 
     def draw
