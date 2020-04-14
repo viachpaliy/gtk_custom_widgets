@@ -20,7 +20,11 @@ module GtkCustomWidgets
 
     def draw_seg
       context = Gdk.cairo_create(@darea.window.not_nil!)
-      s_w = @darea.allocated_width*@seg_width
+      if @seg_width > 0.15 * @darea.allocated_width / @darea.allocated_height
+        s_w = 0.15 * @darea.allocated_width 
+      else
+        s_w = @darea.allocated_height*@seg_width
+      end
       l_h = @darea.allocated_width - s_w*4.5
       l_v = @darea.allocated_height/2 - s_w*1.5
       k = (l_v - 2 * s_w)/l_v

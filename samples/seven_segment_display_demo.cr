@@ -13,7 +13,7 @@ class CairoApp
     @window.resize 300,500
     @window.connect "destroy", &->Gtk.main_quit
     ssd = GtkCustomWidgets::SevenSegmentDisplay.new
-    ssd.seg_width = 0.1
+    ssd.seg_width = 0.05
     hb = Gtk::Box.new :horizontal, 2
     bbox = Gtk::ButtonBox.new :vertical
     btn0 = Gtk::Button.new_with_label "0"

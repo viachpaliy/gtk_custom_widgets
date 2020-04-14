@@ -31,7 +31,7 @@ module GtkCustomWidgets
       @bg_color = Color.new 1.0, 1.0, 1.0
       @on_color = Color.new 1.0, 0.0, 0.0
       @off_color = Color.new 0.85, 0.85, 0.85
-      @seg_width = 0.1
+      @seg_width = 0.05
       @seg_a = false
       @seg_b = false
       @seg_c = false
@@ -207,7 +207,11 @@ module GtkCustomWidgets
 
     def draw
       draw_background
-      s_w = @darea.allocated_width*@seg_width
+      if @seg_width > 0.2 * @darea.allocated_width / @darea.allocated_height
+        s_w = 0.2 * @darea.allocated_width 
+      else
+        s_w = @darea.allocated_height*@seg_width
+      end
       draw_h_seg(s_w*1.5, seg_a)
       draw_h_seg(@darea.allocated_height/2, seg_g)
       draw_h_seg(@darea.allocated_height - s_w*1.5, seg_d)
@@ -232,7 +236,11 @@ module GtkCustomWidgets
       else
         context.set_source_rgb(@off_color.red, @off_color.green, @off_color.blue)
       end
-      s_w = @darea.allocated_width*@seg_width 
+      if @seg_width > 0.2 * @darea.allocated_width / @darea.allocated_height
+        s_w = 0.2 * @darea.allocated_width 
+      else
+        s_w = @darea.allocated_height*@seg_width
+      end 
       context.new_path
       context.move_to (s_w*1.75), y
       context.rel_line_to (s_w*0.5), (-s_w*0.5) 
@@ -251,7 +259,11 @@ module GtkCustomWidgets
       else
         context.set_source_rgb(@off_color.red, @off_color.green, @off_color.blue)
       end
-      s_w = @darea.allocated_width*@seg_width 
+      if @seg_width > 0.2 * @darea.allocated_width / @darea.allocated_height
+        s_w = 0.2 * @darea.allocated_width 
+      else
+        s_w = @darea.allocated_height*@seg_width
+      end 
       context.new_path
       context.move_to x, y
       context.rel_line_to (s_w*0.5), (s_w*0.5)

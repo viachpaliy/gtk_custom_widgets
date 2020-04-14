@@ -30,7 +30,11 @@ module GtkCustomWidgets
     def draw_dot
       context = Gdk.cairo_create(@darea.window.not_nil!)
       set_color(context, dot)
-      radius = @darea.allocated_width*@seg_width/2
+      if @seg_width > 0.15 * @darea.allocated_width / @darea.allocated_height
+        radius = 0.075 * @darea.allocated_width 
+      else
+        radius = @darea.allocated_height*@seg_width/2
+      end
       x =  @darea.allocated_width - 2 * radius
       y =  @darea.allocated_height - 3 * radius 
       context.arc(x, y, radius, 0.0, 2 * Math::PI)

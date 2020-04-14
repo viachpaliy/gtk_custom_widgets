@@ -13,7 +13,7 @@ class CairoApp
     @window.resize 650,500
     @window.connect "destroy", &->Gtk.main_quit
     ssd = GtkCustomWidgets::SlopSevSegDisplay.new
-    ssd.seg_width = 0.1
+    ssd.seg_width = 0.075
     hb = Gtk::Box.new :horizontal, 2
     symbols = "0123456789AbCcdEFGHhIiJLnOoPqrStUuY_-='\u{00B0}[] "
     j = 0
