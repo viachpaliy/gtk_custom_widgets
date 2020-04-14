@@ -99,6 +99,9 @@ module GtkCustomWidgets
         end 
         i +=1
       end
+      if mapped
+        queue_draw
+      end
     end
 
     def print(number : Int8 | Int16 | Int32 | Int64 | UInt8 | UInt16 | UInt32 | UInt64)
@@ -139,7 +142,11 @@ module GtkCustomWidgets
           i += 1
         end
       end
+      if mapped
+        queue_draw
+      end
     end
+
   end
 
 
