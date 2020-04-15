@@ -2,6 +2,7 @@ require "./color"
 require "./seven_segment_display"
 require "./slop_sev_seg_display"
 require "./eight_segment_display"
+require "./timer_colon.cr"
 require "./digital_display"
 
 
