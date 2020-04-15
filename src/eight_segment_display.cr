@@ -16,7 +16,7 @@ module GtkCustomWidgets
       @dp = false
     end
 
-    def dp=(value : Bool = false)
+    def dp=(value : Bool)
       @dp = value
       if mapped
         queue_draw

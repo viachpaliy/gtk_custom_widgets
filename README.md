@@ -7,6 +7,7 @@ The "gtk_custom_widgets" is a collection of helper functions and custom controls
  - [SevenSegmentDisplay](doc/Controls/SevenSegmentDisplay.md)
  - [SlopSevSegDisplay](doc/Controls/SlopSevSegDisplay.md)
  - [EightSegmentDisplay](doc/Controls/EightSegmentDisplay.md)
+ - [DigitalDisplay](doc/Controls/DigitalDisplay.md)
  
 
 ## Installation
