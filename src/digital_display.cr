@@ -92,12 +92,24 @@ module GtkCustomWidgets
     def print(text : String)
       i = 0
       @digits.each do |digit|
+        digit.reset
+        if digit.responds_to?(:dp=)
+          digit.dp = false
+        end
         if i < text.size
           digit.set_char  text[i]
         else
           digit.set_char ' '
         end 
         i +=1
+        if i < text.size
+          if text[i]=='.'
+            if digit.responds_to?(:dp=)
+              digit.dp = true
+            end
+            i +=1
+          end
+        end
       end
       if mapped
         queue_draw
@@ -114,35 +126,20 @@ module GtkCustomWidgets
     end
 
     def print(number : Float32 | Float64)
-      has_dp = false
-      if number.to_s.includes?('.')
-        has_dp = true
-        index_dp = number.to_s.index '.'
-        str = number.to_s.delete '.'
+      str = number.to_s
+      if str.includes?('.')
+        if str.size < n + 1
+          str = " " * (n + 1 - str.size) + str
+        end 
       else
-        str = number.to_s     
-      end 
-      if str.size < n
-        if has_dp 
-          if index_dp
-            index_dp = index_dp + n - str.size
-          end
+        if str.size < n
+          str = " " * (n - str.size) + str
         end
-        str = " " * (n - str.size) + str
       end
       print str
-      if has_dp
-        i = 1
-        @digits.each do |digit|
-          if i == index_dp
-            if digit.responds_to?(:dp=)
-              digit.dp = true
-            end
-          end 
-          i += 1
-        end
-      end
     end
+
+    
 
   end
 

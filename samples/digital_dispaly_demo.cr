@@ -17,6 +17,7 @@ class CairoApp
     dd.bg_color = GtkCustomWidgets::Color.new_from_bytes 0xCE, 0xCE, 0xCE
     dd.off_color = GtkCustomWidgets::Color.new 1.0, 1.0, 1.0
     dd.on_color = GtkCustomWidgets::Color.new 0.0, 0.0, 1.0
+    dd.seg_width = 0.075
     vb = Gtk::Box.new :vertical, 2
     vb.pack_start(dd, expand = true, fill = true, padding = 2)
     hb = Gtk::Box.new :horizontal, 2
@@ -43,7 +44,26 @@ class CairoApp
       dd.print entry.text
     end
     hbs.pack_start(entrys, expand = false, fill = true, padding = 2)
+    labelf = Gtk::Label.new "0123456789AbCcdEFGHhIiJLnOoPqrStUuY_-='\u{00B0}[] "
+    hbs.pack_start(labelf, expand = false, fill = true, padding = 2)
     vb.pack_start(hbs, expand = false, fill = true, padding = 2)
+    hbf = Gtk::Box.new :horizontal, 2
+    labelfl = Gtk::Label.new "Enter float "
+    hbf.pack_start(labelfl, expand = false, fill = true, padding = 2)
+    entryfl = Gtk::Entry.new
+    entryfl.on_activate do |entry|
+      if entry.text.to_f?
+        dd.on_color = GtkCustomWidgets::Color.new 0.0, 0.5, 1.0
+        dd.print entry.text.to_f
+      else
+        dd.on_color = GtkCustomWidgets::Color.new 1.0, 0.0, 0.0
+        dd.print "Error"
+      end
+    end
+    hbf.pack_start(entryfl, expand = false, fill = true, padding = 2)
+    labelfe = Gtk::Label.new "for example : 12345e-2"
+    hbf.pack_start(labelfe, expand = false, fill = true, padding = 2)
+    vb.pack_start(hbf, expand = false, fill = true, padding = 2)
     @window.add vb
   end
 
