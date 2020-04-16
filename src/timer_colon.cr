@@ -82,7 +82,7 @@ module GtkCustomWidgets
     end
 
     def off_color=(color : Color)
-      @ff_color = color
+      @off_color = color
       if mapped
         queue_draw
       end   
