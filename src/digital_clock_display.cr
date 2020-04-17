@@ -87,7 +87,7 @@ module GtkCustomWidgets
 
     def time=(value : Time)
       @hour_display.print value.hour
-      if value.hour > 9 
+      if value.minute > 9 
         @minute_display.print value.minute 
       else
         @minute_display.print "0" + value.minute.to_s
