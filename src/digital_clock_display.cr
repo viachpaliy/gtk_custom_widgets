@@ -86,6 +86,7 @@ module GtkCustomWidgets
     end
 
     def time=(value : Time)
+      @time = value
       @hour_display.print value.hour
       if value.minute > 9 
         @minute_display.print value.minute 
@@ -101,7 +102,6 @@ module GtkCustomWidgets
       else
         @colon.active = true 
       end 
-      @colon.active 
       if mapped
         queue_draw
       end   

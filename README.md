@@ -10,6 +10,7 @@ The "gtk_custom_widgets" is a collection of helper functions and custom controls
  - [DigitalDisplay](doc/Controls/DigitalDisplay.md)
  - [TimerColon](doc/Controls/TimerColon.md)
  - [DigitalClockDisplay](doc/Controls/DigitalClockDisplay.md)
+ - [AnalogClockDisplay](doc/Controls/AnalogClockDisplay.md) 
  
 
 ## Installation
@@ -35,7 +36,13 @@ Note : this shard use "gobject"(https://github.com/jhass/crystal-gobject) and "c
 require "gtk_custom_widgets/gtk_custom_widgets"
 ```
 
-TODO: Write usage instructions here
+## Samples
+
+Run sample :
+```shell
+  cd gtk_custom_widgets
+  crystal run samples/sample_name.cr
+```
 
 ## Development
 
