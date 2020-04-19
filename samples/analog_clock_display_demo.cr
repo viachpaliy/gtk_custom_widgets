@@ -18,9 +18,8 @@ class CairoApp
   end
 
   def show_time
-    @clock.time = Time.utc
-    puts Time.utc
-  end
+    @clock.time = Time.local
+  end 
 
 end
 
