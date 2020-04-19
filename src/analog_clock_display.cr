@@ -49,12 +49,12 @@ module GtkCustomWidgets
       else 
         radius = @radius * @darea.allocated_height - @darea.allocated_height * border_width / 2
       end
-      context.set_source_rgb( border_color.red, border_color.green, border_color.blue) 
+      context.set_source_rgba( border_color.red, border_color.green, border_color.blue, border_color.alfa) 
       context.arc(@darea.allocated_width / 2, @darea.allocated_height / 2, radius , 0 , 2 * Math::PI)
       context.stroke_preserve
-      context.set_source_rgb( bg_color.red, bg_color.green, bg_color.blue)
+      context.set_source_rgba( bg_color.red, bg_color.green, bg_color.blue, bg_color.alfa)
       context.fill
-      context.set_source_rgb( handler_color.red, handler_color.green, handler_color.blue)
+      context.set_source_rgba( handler_color.red, handler_color.green, handler_color.blue, handler_color.alfa)
       context.translate @darea.allocated_width / 2, @darea.allocated_height / 2
       context.line_width=@darea.allocated_height * hour_line_width
       i = 0
@@ -88,7 +88,16 @@ module GtkCustomWidgets
       end 
       context.rotate(hour * Math::PI / 6 - Math::PI / 2)
       context.new_path.move_to(-b_w, 0).rel_line_to(0, 3 * w).rel_line_to(radius - 2 * b_w, - 2 * w)
-      context.rel_line_to(0, - 2 * w).rel_line_to(2 * b_w - radius, - 2 * w).close_path.fill 
+      context.rel_line_to(0, - 2 * w).rel_line_to(2 * b_w - radius, - 2 * w).close_path.fill
+      context.identity_matrix
+      context.translate @darea.allocated_width / 2, @darea.allocated_height / 2 
+      context.rotate(time.second * Math::PI / 30)
+      context.new_path.move_to(0, 2 * b_w).rel_line_to(1.25 * w, 0).rel_line_to(0, -radius).rel_line_to(-1.25 * w, 0)
+      context.rel_line_to(0, radius).close_path.fill
+      context.arc(0, 0, 0.35 * b_w, 0 , 2 * Math::PI)
+      context.stroke_preserve
+      context.set_source_rgba( bg_color.red, bg_color.green, bg_color.blue, bg_color.alfa)
+      context.fill
     end
 
    def minute_line_width=(value : Float64)

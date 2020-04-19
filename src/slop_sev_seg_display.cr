@@ -58,9 +58,9 @@ module GtkCustomWidgets
 
    def set_color(context, on : Bool)
       if on
-        context.set_source_rgb(@on_color.red, @on_color.green, @on_color.blue)
+        context.set_source_rgba(@on_color.red, @on_color.green, @on_color.blue, @on_color.alfa)
       else
-        context.set_source_rgb(@off_color.red, @off_color.green, @off_color.blue)
+        context.set_source_rgba(@off_color.red, @off_color.green, @off_color.blue, @off_color.alfa)
       end
     end
 

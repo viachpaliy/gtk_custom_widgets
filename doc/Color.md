@@ -20,3 +20,5 @@
   **green=**(value : Float64) - sets the green component of the color.  
   **blue** - returns the blue component of the color.  
   **blue=**(value : Float64) - sets the blue component of the color.   
+  **alfa** - returns the alfa component of the color.  
+  **alfa=**(value : Float64) - sets the alfa component of the color.   

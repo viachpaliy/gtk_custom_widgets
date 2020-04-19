@@ -229,7 +229,7 @@ module GtkCustomWidgets
 
     def draw_background
       context = Gdk.cairo_create(@darea.window.not_nil!)
-      context.set_source_rgb(@bg_color.red, @bg_color.green, @bg_color.blue)
+      context.set_source_rgba(@bg_color.red, @bg_color.green, @bg_color.blue, @bg_color.alfa)
       context.rectangle(0, 0, @darea.allocated_width, @darea.allocated_height)
       context.stroke_preserve
       context.fill
@@ -238,9 +238,9 @@ module GtkCustomWidgets
     def draw_h_seg(y : Float64, on : Bool)
       context = Gdk.cairo_create(@darea.window.not_nil!)
       if on
-        context.set_source_rgb(@on_color.red, @on_color.green, @on_color.blue)
+        context.set_source_rgba(@on_color.red, @on_color.green, @on_color.blue, @on_color.alfa)
       else
-        context.set_source_rgb(@off_color.red, @off_color.green, @off_color.blue)
+        context.set_source_rgba(@off_color.red, @off_color.green, @off_color.blue, @off_color.alfa)
       end
       if @seg_width > 0.2 * @darea.allocated_width / @darea.allocated_height
         s_w = 0.2 * @darea.allocated_width 
@@ -261,9 +261,9 @@ module GtkCustomWidgets
     def draw_v_seg(x : Float64, y : Float64, on : Bool)
       context = Gdk.cairo_create(@darea.window.not_nil!)
       if on
-        context.set_source_rgb(@on_color.red, @on_color.green, @on_color.blue)
+        context.set_source_rgba(@on_color.red, @on_color.green, @on_color.blue, @on_color.alfa)
       else
-        context.set_source_rgb(@off_color.red, @off_color.green, @off_color.blue)
+        context.set_source_rgba(@off_color.red, @off_color.green, @off_color.blue, @off_color.alfa)
       end
       if @seg_width > 0.2 * @darea.allocated_width / @darea.allocated_height
         s_w = 0.2 * @darea.allocated_width 

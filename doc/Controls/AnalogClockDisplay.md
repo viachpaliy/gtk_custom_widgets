@@ -16,5 +16,7 @@ __new__ -constructor without parameters
 **hour_line_width=**(value : Float64) - sets width of line which draw hour scale relative to height of display(default value - 0.0075).  
 **minute_line_width** - returns width of line which draw minute scale relative to height of display.  
 **minute_line_width=**(value : Float64) - sets width of line which draw minute scale relative to height of display(default value - 0.0075).  
+**time** - returns time which shows the display.  
+**time=**(value : Time) - sets time which shows the display.  
 
 ![](../../images/AnalogClockDisplay.png)
