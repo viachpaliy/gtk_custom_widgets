@@ -6,11 +6,11 @@ module GtkCustomWidgets
   class TimerColon < Gtk::ScrolledWindow
 
     @darea : Gtk::DrawingArea
-    getter bg_color : Color
-    getter on_color : Color
-    getter off_color : Color
-    getter active : Bool
-    getter dot_radius : Float64
+    gtk_widget_property bg_color : Color
+    gtk_widget_property on_color : Color
+    gtk_widget_property off_color : Color
+    gtk_widget_property active : Bool
+    gtk_widget_property dot_radius : Float64
 
     def self.new
       super nil, nil
@@ -67,40 +67,6 @@ module GtkCustomWidgets
       context.fill
     end
 
-    def bg_color=(color : Color)
-      @bg_color = color
-      if mapped
-        queue_draw
-      end   
-    end
-
-    def on_color=(color : Color)
-      @on_color = color
-      if mapped
-        queue_draw
-      end   
-    end
-
-    def off_color=(color : Color)
-      @off_color = color
-      if mapped
-        queue_draw
-      end   
-    end
-
-    def active=(value : Bool)
-      @active = value
-      if mapped
-        queue_draw
-      end 
-    end 
-
-    def dot_radius=(value : Float64)
-      @dot_radius= value
-      if mapped
-        queue_draw
-      end 
-    end
 
   end
 

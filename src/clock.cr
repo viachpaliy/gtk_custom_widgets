@@ -42,13 +42,17 @@ module GtkCustomWidgets
         queue_draw
       end 
     end 
+
+    def show_time
+      @time = Time.local @location
+      @display.time = @time
+    end
     
     def start
       @run = true
       spawn do
         loop do
-          @time = Time.local @location
-          @display.time = @time
+          show_time
           sleep(1.seconds)
         end
       end
