@@ -1,7 +1,7 @@
  # NixieTube
 
  A control for rendering a cold cathode display(nixie tube).(https://en.wikipedia.org/wiki/Nixie_tube)  
- Can be used in [DigitalDisplay].(./DigitalDisplay.md)
+ Can be used in [DigitalDisplay](./DigitalDisplay.md)
 
  ## Metods  
 **char** - returns displaying char.  
