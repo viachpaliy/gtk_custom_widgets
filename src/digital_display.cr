@@ -30,9 +30,18 @@ module GtkCustomWidgets
         @digits << d
       end 
       @digits.each do |digit|
-        digit.bg_color = @bg_color
-        digit.on_color = @on_color
-        digit.off_color = @off_color
+        if digit.responds_to?(:bg_color=)
+          digit.bg_color = bg_color
+        end
+        if digit.responds_to?(:on_color=)
+          digit.on_color = on_color
+        end
+        if digit.responds_to?(:off_color=)
+          digit.off_color = off_color
+        end
+        if digit.responds_to?(:seg_width=)
+          digit.seg_width = seg_width
+        end
       end
     end
 
@@ -55,36 +64,53 @@ module GtkCustomWidgets
       end
       @n = num
       @digits.each do |digit|
-        digit.bg_color = bg_color
-        digit.on_color = on_color
-        digit.off_color = off_color
+        if digit.responds_to?(:bg_color=)
+          digit.bg_color = bg_color
+        end
+        if digit.responds_to?(:on_color=)
+          digit.on_color = on_color
+        end
+        if digit.responds_to?(:off_color=)
+          digit.off_color = off_color
+        end
+        if digit.responds_to?(:seg_width=)
+          digit.seg_width = seg_width
+        end
       end
     end
 
     def bg_color=(value : Color)
       @digits.each do |digit|
-        digit.bg_color = value
+        if digit.responds_to?(:bg_color=)
+          digit.bg_color = value
+        end
       end
       @bg_color = value
     end 
 
     def on_color=(value : Color)
       @digits.each do |digit|
-        digit.on_color = value
+        if digit.responds_to?(:on_color=)
+          digit.on_color = value
+        end
       end
       @on_color = value
     end 
 
     def off_color=(value : Color)
       @digits.each do |digit|
-        digit.off_color = value
+        if digit.responds_to?(:off_color=)
+          digit.off_color = value
+        end
       end
       @off_color = value
     end 
 
     def seg_width=(value : Float64)
       @digits.each do |digit|
-        digit.seg_width = value
+        if digit.responds_to?(:seg_width=)
+          digit.seg_width = value
+        end
       end
       @seg_width = value
     end
@@ -97,17 +123,17 @@ module GtkCustomWidgets
           digit.dp = false
         end
         if i < text.size
-          digit.set_char  text[i]
+          digit.char = text[i]
         else
-          digit.set_char ' '
+          digit.char = ' '
         end 
         i +=1
         if i < text.size
           if text[i]=='.'
             if digit.responds_to?(:dp=)
               digit.dp = true
+              i +=1
             end
-            i +=1
           end
         end
       end
@@ -128,9 +154,21 @@ module GtkCustomWidgets
     def print(number : Float32 | Float64)
       str = number.to_s
       if str.includes?('.')
-        if str.size < n + 1
-          str = " " * (n + 1 - str.size) + str
-        end 
+        has_dp = false
+        @digits.each do |digit|
+          if digit.responds_to?(:dp=)
+            has_dp = true
+          end
+        end
+        if has_dp
+          if str.size < n + 1
+            str = " " * (n + 1 - str.size) + str
+          end 
+        else
+          if str.size < n
+            str = " " * (n - str.size) + str
+          end
+        end
       else
         if str.size < n
           str = " " * (n - str.size) + str

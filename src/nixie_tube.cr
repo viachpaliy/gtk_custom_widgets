@@ -19,6 +19,10 @@ module GtkCustomWidgets
       connect "draw",&->draw
     end
 
+    def reset
+      char = ' '
+    end
+
     def draw
       context = Gdk.cairo_create(window.not_nil!)
       draw(context.as Cairo::Context)

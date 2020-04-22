@@ -11,6 +11,7 @@ The "gtk_custom_widgets" is a collection of helper functions and custom controls
  - [TimerColon](doc/Controls/TimerColon.md)
  - [DigitalClockDisplay](doc/Controls/DigitalClockDisplay.md)
  - [AnalogClockDisplay](doc/Controls/AnalogClockDisplay.md) 
+ - [NixieTube](doc/Controls/NixieTube.md)
  
 
 ## Installation
