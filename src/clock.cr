@@ -6,7 +6,7 @@ module GtkCustomWidgets
   class Clock(T)
  
     @display : T
-    @run : Bool
+    @state : Bool
     @time : Time
     getter location : Time::Location
 
@@ -15,11 +15,20 @@ module GtkCustomWidgets
  
     def initialize
       @display = T.new
-      @run = false
+      @state = false
       @time = Time.local
       @location = Time::Location.local
       @display.time = @time
       @display.connect "destroy", &-> stop 
+      GLib.timeout 0.5, do
+        if @state == false
+          next true
+        end
+        if mapped
+          show_time
+        end
+        next true
+      end
     end
 
     def location=(loc : Time::Location)
@@ -49,24 +58,12 @@ module GtkCustomWidgets
     end
     
     def start
-      @run = true
-      spawn do
-        loop do
-          show_time
-          sleep(1.seconds)
-        end
-      end
-      while @run
-        if mapped
-          Fiber.yield
-          @run = false
-        end
-      end 
+      @state = true
     end
 
     def stop
-      if @run
-        @run = false
+      if @state
+        @state = false
       end
     end
 
