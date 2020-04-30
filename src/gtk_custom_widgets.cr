@@ -1,4 +1,5 @@
 require "./gtk_widget_property"
+require "./color_keywords"
 require "./color"
 require "./seven_segment_display"
 require "./slop_sev_seg_display"
