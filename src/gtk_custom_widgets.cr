@@ -1,6 +1,7 @@
 require "./core/gtk_widget_property"
 require "./core/color_keywords"
 require "./core/color"
+require "./core/line_style"
 require "./widgets/seven_segment_display"
 require "./widgets/slop_sev_seg_display"
 require "./widgets/eight_segment_display"

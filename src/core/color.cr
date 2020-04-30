@@ -24,6 +24,10 @@ module GtkCustomWidgets
       new(Float64.new(red / 255), Float64.new(green / 255), Float64.new(blue / 255), Float64.new(alfa / 255))
     end
 
+    def self.new(style : String) : self
+      new.set_style(style) 
+    end
+
     def set_hex_rgb(hex)
       hex = hex.floor
       red = (hex >> 16 & 255) / 255.0
