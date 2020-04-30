@@ -57,9 +57,9 @@ module GtkCustomWidgets
     def set_hsl(h, s, l)
       # h,s,l ranges are in 0.0 - 1.0
       if s == 0.0
-        red = 1.0
-        green = 1.0
-        blue = l.0
+        red = l
+        green = l
+        blue = l
       else
         p = l <= 0.5 ? l * (1.0 + s) : l + s - (l * s)
         q = (2.0 * l) - p
