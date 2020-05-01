@@ -25,7 +25,7 @@ module GtkCustomWidgets
     end
 
     def self.new(style : String) : self
-      new.set_style(style) 
+      new.set_style(style).as Color 
     end
 
     def set_hex_rgb(hex)
@@ -33,6 +33,7 @@ module GtkCustomWidgets
       red = (hex >> 16 & 255) / 255.0
       green = (hex >> 8 & 255) / 255.0
       blue = (hex & 255) / 255.0
+      alfa = 1.0
       self
     end
 
@@ -76,6 +77,7 @@ module GtkCustomWidgets
         red = [255.0, $1.to_f].min / 255.0
         green = [255.0, $2.to_f].min / 255.0
         blue = [255.0, $3.to_f].min / 255.0
+        alfa = 1.0
         return self
       end
       # rgba(255,0,0,1)
@@ -91,6 +93,7 @@ module GtkCustomWidgets
         red = [100.0, $1.to_f].min / 100.0
         green = [100.0, $2.to_f].min / 100.0
         blue = [100.0, $3.to_f].min / 100.0
+        alfa = 1.0
         return self
       end
       # rgba(100%,0%,0%,100%)
@@ -104,40 +107,41 @@ module GtkCustomWidgets
       # #ff0000
       if /^\#([0-9a-f]{6})$/i =~ style
         hb = $1.hexbytes
-        red = hb[0]
-        green = hb[1]
-        blue = hb[2]
+        red = hb[0] / 255.0
+        green = hb[1] / 255.0
+        blue = hb[2] / 255.0
+        alfa = 1.0
         return self
       end
       # #ff0000ff
       if /^\#([0-9a-f]{8})$/i =~ style
         hb = $1.hexbytes
-        red = hb[0]
-        green = hb[1]
-        blue = hb[2]
-        alfa = hb[3]
+        red = hb[0] / 255.0
+        green = hb[1] / 255.0
+        blue = hb[2] / 255.0
+        alfa = hb[3] / 255.0
         return self
       end
       # #f00
       if /^\#([0-9a-f])([0-9a-f])([0-9a-f])$/i =~ style
         hb = ($1 + $1 + $2 + $2 + $3 + $3).hexbytes
-        red = hb[0]
-        green = hb[1]
-        blue = hb[2]
+        red = hb[0] / 255.0
+        green = hb[1] / 255.0
+        blue = hb[2] / 255.0
         return self
       end
       # #f00f
       if /^\#([0-9a-f])([0-9a-f])([0-9a-f])([0-9a-f])$/i =~ style
         hb = ($1 + $1 + $2 + $2 + $3 + $3 + $4 +$4).hexbytes
-        red = hb[0]
-        green = hb[1]
-        blue = hb[2]
-        alfa = hb[3]
+        red = hb[0] / 255.0
+        green = hb[1] / 255.0
+        blue = hb[2] / 255.0
+        alfa = hb[3] / 255.0
         return self
       end
       # red
       if /^(\w+)$/i =~ style
-        self.set_hex(ColorKeywords[style])
+        self.set_hex_rgb(ColorKeywords[style])
         return self
       end
     end
