@@ -6,6 +6,8 @@ module GtkCustomWidgets
   class Shape(T)  < Gtk::ScrolledWindow
 
     property geometry : T
+    property stroke : Nil | LineStyle | SolidColorBrush
+    property fill : Nil
 
     def self.new
       super nil, nil
@@ -16,6 +18,8 @@ module GtkCustomWidgets
       hexpand = true
       vexpand = true
       @geometry = T.new
+      @stroke = nil
+      @fill = nil
       connect "draw",&->draw
     end
 
@@ -24,28 +28,35 @@ module GtkCustomWidgets
       draw(context.as Cairo::Context)
     end
 
+    def draw_child(context : Cairo::Context)
+      if c = child
+        c.draw(context)
+      end
+    end 
+
     def draw(context : Cairo::Context)
       context.set_source_rgba(1.0, 1.0, 1.0, 0.0)
       context.rectangle(0, 0, allocated_width, allocated_height)
       context.stroke_preserve
-      context.fill      
-      if brush = geometry.brush 
-        if brush.is_a?(LineStyle)
-          context.line_width = brush.width
-          context.set_source_rgba(brush.color.red, brush.color.green, brush.color.blue,brush.color.alfa)
-          context.line_cap = brush.cap_style
-          context.line_join = brush.join_style
-          context.set_dash(brush.dashes, 0.0)
-          geometry.create_cairo_path(context) 
+      context.fill 
+      geometry.create_cairo_path(context) 
+      if fill_brush = @fill
+        if fill_brush.is_a?(FillBrush)
+          fill_brush.set_active(context) 
+          context.fill_preserve
+        else
+          context.fill_preserve
+        end
+      end     
+      if brush = @stroke
+        if brush.is_a?(Brush)
+          brush.set_active(context) 
           context.stroke
         else
-          geometry.create_cairo_path(context) 
           context.stroke
         end
-      else
-        geometry.create_cairo_path(context) 
-        context.stroke
       end 
+      draw_child(context)
     end    
 
   end

@@ -14,7 +14,6 @@ module GtkCustomWidgets
     def initialize(start : Point, end_p : Point)
       @start_point = start
       @end_point = end_p
-      @brush = nil
     end 
 
     def bounds : Cairo::Rectangle

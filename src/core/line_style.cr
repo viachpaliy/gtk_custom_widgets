@@ -1,10 +1,13 @@
+require "cairo-gobject/cairo"
+
 module GtkCustomWidgets
 
-  class LineStyle
+  class LineStyle < Brush
 
     property width : Float64
     property color : Color
     property dashes : Array(Float64)
+    property dash_offset : Float64
     property cap_style : Cairo::LineCap
     property join_style : Cairo::LineJoin
 
@@ -14,6 +17,15 @@ module GtkCustomWidgets
       @dashes = Array(Float64).new
       @cap_style = Cairo::LineCap::BUTT
       @join_style = Cairo::LineJoin::MITER
+      @dash_offset = 0.0
+    end
+
+    def set_active(context : Cairo::Context)
+      context.line_width = width
+      context.set_source_rgba(color.red, color.green, color.blue, color.alfa)
+      context.line_cap = cap_style
+      context.line_join = join_style
+      context.set_dash(dashes, dash_offset)
     end
 
   end
