@@ -3,11 +3,11 @@ require "cairo-gobject/cairo"
 
 module GtkCustomWidgets
 
-  class Shape(T)  < Gtk::ScrolledWindow
-
-    property geometry : T
-    property stroke : Nil | LineStyle | SolidColorBrush
-    property fill : Nil
+  class Shape  < Gtk::ScrolledWindow
+   
+    @stroke : Nil | Brush
+    @fill : Nil | FillBrush
+    @geometry : Nil | Geometry
 
     def self.new
       super nil, nil
@@ -17,10 +17,40 @@ module GtkCustomWidgets
       super(ptr)
       hexpand = true
       vexpand = true
-      @geometry = T.new
+      @geometry = nil
       @stroke = nil
       @fill = nil
       connect "draw",&->draw
+    end
+
+    def geometry
+      @geometry
+    end
+
+    def geometry=(value)
+      if value.is_a?(Geometry)
+        @geometry = Geometry.cast(value)
+      end
+    end 
+
+    def fill
+      @fill
+    end
+
+    def fill=(value)
+      if value.is_a?(FillBrush)
+        @fill = FillBrush.cast(value)
+      end
+    end
+
+    def stroke
+      @stroke
+    end
+
+    def stroke=(value)
+      if value.is_a?(Brush)
+        @stroke = Brush.cast(value)
+      end 
     end
 
     def draw
@@ -39,7 +69,9 @@ module GtkCustomWidgets
       context.rectangle(0, 0, allocated_width, allocated_height)
       context.stroke_preserve
       context.fill 
-      geometry.create_cairo_path(context) 
+      if geom = @geometry 
+        geom.create_cairo_path(context)
+      end 
       if fill_brush = @fill
         if fill_brush.is_a?(FillBrush)
           fill_brush.set_active(context) 

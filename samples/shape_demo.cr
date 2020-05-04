@@ -13,13 +13,13 @@ lg = GCW::LineGeometry.new s_p, e_p
 br = GCW::LineStyle.new
 br.color = GCW::Color.new "darkcyan"
 br.width = 10
-line = GCW::Shape(GCW::LineGeometry).new
+line = GCW::Shape.new
 line.geometry = lg
 line.stroke = br
-line2 = GCW::Shape(GCW::LineGeometry).new
+line2 = GCW::Shape.new
 line2.geometry = GCW::LineGeometry.new GCW::Point.new(10, 270), GCW::Point.new(470, 20)
 line2.stroke = GCW::SolidColorBrush.new GCW::Color.new("blue")
-line3 = GCW::Shape(GCW::LineGeometry).new
+line3 = GCW::Shape.new
 line3.geometry = GCW::LineGeometry.new GCW::Point.new(250, 20), GCW::Point.new(250, 270)
 line3.stroke = GCW::SolidColorBrush.new GCW::Color.new("darkgreen")
 line2.add line3
