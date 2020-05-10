@@ -16,6 +16,18 @@ module GtkCustomWidgets
       context.fill_rule = fill_rule
     end
 
+    def stroke(context : Cairo::Context, geometry : Geometry)
+      geometry.create_cairo_path(context)
+      set_active(context) 
+      context.stroke
+    end
+
+    def fill(context : Cairo::Context, geometry : Geometry)
+      geometry.create_cairo_path(context)
+      set_active(context) 
+      context.fill
+    end
+
   end
 
 end

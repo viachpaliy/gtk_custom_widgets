@@ -10,6 +10,8 @@ module GtkCustomWidgets
       @fill_rule = Cairo::FillRule::WINDING
     end
 
+    abstract def fill(context : Cairo::Context, geometry : Geometry)
+
   end
 
 end

@@ -4,7 +4,7 @@ module GtkCustomWidgets
 
   abstract class Brush
 
-    abstract def set_active(context : Cairo::Context)
+    abstract def stroke(context : Cairo::Context, geometry : Geometry)
 
   end
 

@@ -1,5 +1,5 @@
 require "./core/gtk_widget_property"
-require "./core/gtk_container_foreach"
+require "./core/gtk_container_extension"
 require "./core/color_keywords"
 require "./core/color"
 require "./core/brush"

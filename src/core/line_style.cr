@@ -28,6 +28,12 @@ module GtkCustomWidgets
       context.set_dash(dashes, dash_offset)
     end
 
+    def stroke(context : Cairo::Context, geometry : Geometry)
+      geometry.create_cairo_path(context)
+      set_active(context) 
+      context.stroke
+    end
+
   end
 
 end

@@ -69,23 +69,18 @@ module GtkCustomWidgets
       context.rectangle(0, 0, allocated_width, allocated_height)
       context.stroke_preserve
       context.fill 
-      if geom = @geometry 
-        geom.create_cairo_path(context)
-      end 
       if fill_brush = @fill
         if fill_brush.is_a?(FillBrush)
-          fill_brush.set_active(context) 
-          context.fill_preserve
-        else
-          context.fill_preserve
+          if geom = @geometry 
+            fill_brush.fill(context,geom) 
+          end
         end
       end     
       if brush = @stroke
         if brush.is_a?(Brush)
-          brush.set_active(context) 
-          context.stroke
-        else
-          context.stroke
+          if geom = @geometry 
+            brush.stroke(context,geom) 
+          end
         end
       end 
       draw_child(context)
