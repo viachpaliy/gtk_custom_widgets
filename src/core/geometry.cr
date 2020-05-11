@@ -8,6 +8,8 @@ module GtkCustomWidgets
 
     abstract def create_cairo_path(cr : Cairo::Context)
 
+    abstract def create_cairo_sub_path(cr : Cairo::Context)
+
   end
 
 end

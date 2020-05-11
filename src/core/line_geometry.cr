@@ -21,10 +21,15 @@ module GtkCustomWidgets
       y = min(start_point.y, end_point.y)
       w = max(start_point.x, end_point.x) - min(start_point.x, end_point.x)
       h = max(start_point.y, end_point.y) - min(start_point.y, end_point.y)
+      Cairo::Rectangle.new x, y, w, h
     end
 
     def create_cairo_path(cr : Cairo::Context)
       cr.new_path.move_to(start_point.x, start_point.y).line_to(end_point.x, end_point.y)
+    end
+
+    def create_cairo_sub_path(cr : Cairo::Context)
+      cr.new_sub_path.move_to(start_point.x, start_point.y).line_to(end_point.x, end_point.y)
     end
 
   end

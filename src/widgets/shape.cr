@@ -29,7 +29,7 @@ module GtkCustomWidgets
 
     def geometry=(value)
       if value.is_a?(Geometry)
-        @geometry = Geometry.cast(value)
+        @geometry = value
       end
     end 
 

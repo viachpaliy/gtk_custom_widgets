@@ -24,6 +24,15 @@ line3.geometry = GCW::LineGeometry.new GCW::Point.new(250, 20), GCW::Point.new(2
 line3.stroke = GCW::SolidColorBrush.new GCW::Color.new("darkgreen")
 line2.add line3
 line.add line2
+geo = GCW::PolygonGeometry.new
+[GCW::Point.new(50, 20), GCW::Point.new(250, 120), GCW::Point.new(50, 220)].each do |point|
+  geo.points << point
+end 
+polygon = GCW::Shape.new 
+polygon.geometry = geo
+polygon.stroke = GCW::SolidColorBrush.new GCW::Color.new("bisque")
+polygon.fill = GCW::SolidColorBrush.new GCW::Color.new("darkgoldenrod")
+line3.add polygon
 window.add line
 
 window.show_all
