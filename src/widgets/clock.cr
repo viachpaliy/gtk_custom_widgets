@@ -30,6 +30,10 @@ module GtkCustomWidgets
         next true
       end
     end
+    
+    def display
+      @display 
+    end
 
     def location=(loc : Time::Location)
       @location = loc

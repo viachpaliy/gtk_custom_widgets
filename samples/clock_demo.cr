@@ -15,9 +15,9 @@ class CairoApp
     hb1 = Gtk::Box.new :horizontal, 2
     clock1 = GtkCustomWidgets::Clock(GtkCustomWidgets::DigitalClockDisplay).new
     clock1.blink = true
-    hb1.pack_start(clock1, expand = true, fill = true, padding = 2)
+    hb1.pack_start(clock1.display, expand = true, fill = true, padding = 2)
     clock2 = GtkCustomWidgets::Clock(GtkCustomWidgets::AnalogClockDisplay).new
-    hb1.pack_start(clock2, expand = true, fill = true, padding = 2)
+    hb1.pack_start(clock2.display, expand = true, fill = true, padding = 2)
     hb2 = Gtk::Box.new :horizontal, 2
     btn0 = Gtk::Button.new_with_label "start"
     btn0.on_clicked {clock1.start
